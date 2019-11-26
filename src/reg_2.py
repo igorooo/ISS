@@ -22,6 +22,11 @@ t[0] = 0
 
 for i in range(1, steps):
     x[i] = x[i-1] - h*(a*x[i-1] - v[i-1])
+
+
+
+
+    """
     if x[i] > X + hist and v[i-1] != 0:
         v[i] = 0
         print(x[i], end='1st if ->')
@@ -33,6 +38,7 @@ for i in range(1, steps):
         print(i, end=' v[i]')
         print(v[i-1])
         print(v[i])
+        """
 
     t[i] = t[i-1] + h
 

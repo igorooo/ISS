@@ -21,9 +21,13 @@ print("\n")
 print(y)
 
 for i in range(steps):
-
     x.append(x[i] + h*(y[i]))
     y.append(y[i] + h*(-a0 * x[i] - a1 * y[i]))
+    t.ap
 
     print(x[i], end='\n')
     print(y[i], end='\n\n')
+
+plt.plot(t, x, label='x label')
+plt.legend()
+plt.show()
