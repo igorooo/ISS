@@ -1,0 +1,97 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+T = 10
+h = 0.01
+a = -0.5
+hist = 5
+x0 = 100
+# treshold
+X = 20
+
+
+steps = (int)(T / h)
+
+# function
+x = np.zeros((steps))
+# control signal
+u = np.zeros((steps))
+# time
+t = np.zeros((steps))
+# error
+e = np.zeros((steps))
+
+# error
+I = np.zeros((steps))
+
+# error
+D = np.zeros((steps))
+
+# error
+P = np.zeros((steps))
+
+
+
+
+x[0] = x0
+u[0] = 1
+t[0] = 0
+e[0] = X - x0
+power = False
+
+Kp = 0.5
+Ki = 0.001
+Kd = 0.1
+
+
+"""for i in range(1, steps):
+    x[i] = x[i-1] + h*(a*x[i-1] + u[i-1])
+    t[i] = t[i-1] + h
+    e[i] = X - x[i]
+
+    I[i] = I[i-1] + e[i]
+    D[i] = e[i] - e[i-1]
+    P[i] = e[i]
+
+    u[i] = Kp * P[i] + Ki * I[i] + Kd * D[i]"""
+
+e = lambda val : 20 - val
+fx = lambda val1, val2: a*(val1 + val2)
+
+def funct(step, Tmax,  f0, ex, fx, Kp, Ki, Kd):
+    iterations = (int)(Tmax/step)
+    f = np.zeros((iterations))
+    error = np.zeros((iterations))
+    control = error = np.zeros((iterations))
+    time = np.zeros((iterations))
+
+    I = np.zeros((steps))
+    D = np.zeros((steps))
+    P = np.zeros((steps))
+
+    f[0] = f0
+
+    for i in range(1, iterations):
+        f[i] = fx(f[i-1], control[i-1])
+        error[i] = ex(f[i])
+        time[i] = time[i-1] + step
+        I[i] = I[i-1] + error[i]
+        D[i] = e[i] - e[i-1]
+        P[i] = e[i]
+
+        control[i] = Kp * P[i] + Ki * I[i] + Kd * D[i]
+
+    return f,error,time,control,P,I,D
+
+x, e, t, u, P, I, D =
+
+
+
+plt.plot(t, x, label='function')
+plt.plot(t, u, label='control signal')
+plt.plot(t, e, label='error/P')
+plt.plot(t, I, label='Integral')
+plt.plot(t, D, label='Derivative')
+plt.legend()
+plt.show()
